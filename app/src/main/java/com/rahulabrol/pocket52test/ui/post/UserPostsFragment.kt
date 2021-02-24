@@ -1,6 +1,8 @@
 package com.rahulabrol.pocket52test.ui.post
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import com.rahulabrol.pocket52test.HomeViewModel
 import com.rahulabrol.pocket52test.R
 import com.rahulabrol.pocket52test.base.DataBindingFragment
 import com.rahulabrol.pocket52test.databinding.FragmentUserPostsBinding
+import com.rahulabrol.pocket52test.model.Post
 import com.rahulabrol.pocket52test.ui.adapter.PostAdapter
 import com.rahulabrol.pocket52test.ui.postdetail.UserPostDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +32,6 @@ class UserPostsFragment : DataBindingFragment() {
 
     private val postAdapter by lazy(LazyThreadSafetyMode.PUBLICATION) {
         PostAdapter { post ->
-            Toast.makeText(requireContext(), "CLicked", Toast.LENGTH_SHORT).show()
             val bundle = UserPostDetailFragment.getDataBundle(post)
             findNavController().navigate(
                 R.id.action_userPostsFragment_to_userPostDetailFragment, bundle
@@ -56,8 +58,38 @@ class UserPostsFragment : DataBindingFragment() {
             lifecycleOwner = this@UserPostsFragment
             adapter = postAdapter
             viewModel = homeViewModel
+            edSearch.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    s?.let { filter(it.toString()) }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+            })
         }
         return binding.root
+    }
+
+    private fun filter(text: String) {
+        val temp = arrayListOf<Post>()
+        for (user in homeViewModel.postsLiveData.value!!) {
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if (user.id?.contains(text) == true) {
+                temp.add(user)
+            }
+        }
+        //update recyclerview
+        postAdapter.addPostList(temp)
     }
 
     override fun observeViewModel() {

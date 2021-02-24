@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Pocket52Test</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="search_user_id">Search user id</string>
 </resources>
