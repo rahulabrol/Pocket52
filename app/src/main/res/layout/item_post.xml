@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="com.rahulabrol.pocket52test.model.Post" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:background="@color/white"
+        android:padding="@dimen/dimen_2">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvClassHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_5"
+            android:ellipsize="end"
+            android:letterSpacing="-0.04"
+            android:maxLines="2"
+            android:text="@{`Id: `+post.id}"
+            android:textFontWeight="800"
+            android:textSize="@dimen/text_size_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="p"
+            tools:text="Id: 12341" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPostCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_5"
+            android:ellipsize="end"
+            android:letterSpacing="-0.04"
+            android:maxLines="2"
+            android:text="@{`Total Posts:` + post.totalPosts}"
+            android:textFontWeight="800"
+            android:textSize="@dimen/text_size_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvClassHeader"
+            tools:targetApi="p"
+            tools:text="Total Posts: 123" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:background="@color/grey_light_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvClassHeader"
+            app:layout_constraintTop_toBottomOf="@id/tvPostCount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

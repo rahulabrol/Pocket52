@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@id/userPostsFragment">
+
+    <fragment
+        android:id="@+id/userPostsFragment"
+        android:name="com.rahulabrol.pocket52test.ui.post.UserPostsFragment"
+        android:label="UserPostsFragment"
+        tools:layout="@layout/fragment_user_posts">
+        <action
+            android:id="@+id/action_userPostsFragment_to_userPostDetailFragment"
+            app:destination="@id/userPostDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userPostDetailFragment"
+        android:name="com.rahulabrol.pocket52test.ui.postdetail.UserPostDetailFragment"
+        android:label="UserPostDetailFragment"
+        tools:layout="@layout/fragment_user_post_detail"/>
+
+</navigation>
